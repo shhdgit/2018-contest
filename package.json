@@ -1,0 +1,30 @@
+{
+  "name": "2018-contest",
+  "version": "1.0.0",
+  "description": "这是星计划校招选拔的综合挑战题",
+  "main": "index.js",
+  "alias": {
+    "game-core": "./src/core/index.js"
+  },
+  "scripts": {
+    "start": "parcel src/index.html -p 2048",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shhdgit/2018-contest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shhdgit/2018-contest/issues"
+  },
+  "homepage": "https://github.com/shhdgit/2018-contest#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "parcel-bundler": "^1.7.0"
+  },
+  "dependencies": {
+    "vue": "^2.5.16"
+  }
+}
