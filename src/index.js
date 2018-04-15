@@ -3,6 +3,5 @@ import Vue from 'vue'
 import App from './App'
 
 new Vue({
-  ...App,
-  el: '#app',
-})
+  render: h => h(App),
+}).$mount('#app')
