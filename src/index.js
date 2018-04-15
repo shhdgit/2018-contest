@@ -1,3 +1,8 @@
-import { test } from 'game-core'
+import Vue from 'vue'
 
-test()
+import App from './App'
+
+new Vue({
+  ...App,
+  el: '#app',
+})
