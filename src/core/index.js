@@ -14,6 +14,7 @@ class Game {
     this.status = {
       win: false,
       score: 0,
+      max: 2,
     }
 
     this.setRandomBlock(2)
@@ -26,31 +27,23 @@ class Game {
     switch (direction) {
       case 'bottom': {
         this.matrix.turn('right')
-        this.zip()
-        max = this.calculate()
-        this.zip()
+        this.updateGameboard()
         this.matrix.turn('left')
         break
       }
       case 'top': {
         this.matrix.turn('left')
-        this.zip()
-        max = this.calculate()
-        this.zip()
+        this.updateGameboard()
         this.matrix.turn('right')
         break
       }
       case 'left': {
-        this.zip()
-        max = this.calculate()
-        this.zip()
+        this.updateGameboard()
         break
       }
       case 'right': {
         this.matrix.turn('back')
-        this.zip()
-        max = this.calculate()
-        this.zip()
+        this.updateGameboard()
         this.matrix.turn('back')
         break
       }
@@ -58,12 +51,18 @@ class Game {
       throw new Error('Error direction')
     }
 
-    this.updateGameStatus(max)
+    this.updateGameStatus()
     this.setRandomBlock(2)
   }
 
-  updateGameStatus(max) {
-    if (max >= this._max) {
+  updateGameboard() {
+    this.zip()
+    this.calculate()
+    this.zip()
+  }
+
+  updateGameStatus() {
+    if (this.status.max >= this._max) {
       this.status.win = true
     }
   }
@@ -96,8 +95,6 @@ class Game {
   }
 
   calculate() {
-    let max = 0
-
     for (let i = 0; i < this._size; i++) {
       for (let j = 0; j < this._size; j++) {
         if (j < this._size - 1 && this.matrix.array[i][j] === this.matrix.array[i][j + 1]) {
@@ -112,11 +109,9 @@ class Game {
         // get max
         const num = this.matrix.array[i][j]
 
-        if (num > max) max = num
+        if (num > this.status.max) this.status.max = num
       }
     }
-
-    return max
   }
 
   setRandomBlock(num) {
