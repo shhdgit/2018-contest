@@ -1,0 +1,24 @@
+
+.scene-wrap[data-v-4001b7] {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  user-select: none;
+}
+.scene[data-v-4001b7] {
+  position: relative;
+  width: 100%;
+  padding: 1%;
+  border-radius: 10px;
+  background: #bbada0;
+  box-sizing: border-box;
+}
+.scene[data-v-4001b7]::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.block[data-v-4001b7] {
+  background: #cdc0b4;
+  float: left;
+}
