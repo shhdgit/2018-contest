@@ -10,4 +10,4 @@ var t=(0,eval)("this");Object.defineProperty(exports,"__esModule",{value:!0});va
 },{"game-core":18}],6:[function(require,module,exports) {
 "use strict";var e=require("vue"),u=n(e),r=require("./App"),t=n(r);function n(e){return e&&e.__esModule?e:{default:e}}new u.default({render:function(e){return e(t.default)}}).$mount("#app");
 },{"vue":10,"./App":12}]},{},[6])
-//# sourceMappingURL=dist/src.67b57ab6.map
+//# sourceMappingURL=src.67b57ab6.map
