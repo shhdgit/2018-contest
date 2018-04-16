@@ -3,15 +3,40 @@
   <div class="scene">
     <div class="block" v-for="i in 16" :key="i"></div>
   </div>
+  <div v-for="(row, index) in game.matrix.array">
+    <span v-for="(num, index) in row">{{ num }}</span>
+  </div>
+  <div @click="up">up</div>
+  <div @click="down">down</div>
+  <div @click="left">left</div>
+  <div @click="right">right</div>
 </div>
 </template>
 
 <script>
+import { Game } from 'game-core'
+
 export default {
   name: 'App',
   data() {
     return {
+      game: new Game(),
     }
+  },
+
+  methods: {
+    up() {
+      this.game.move('top')
+    },
+    down() {
+      this.game.move('bottom')
+    },
+    left() {
+      this.game.move('left')
+    },
+    right() {
+      this.game.move('right')
+    },
   },
 }
 </script>

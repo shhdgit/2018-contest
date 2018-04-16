@@ -7,7 +7,11 @@
 class Matrix {
   constructor(x, y) {
     this.size = { x, y }
-    this.array = new Array(y).fill(new Array(x).fill(0))
+    this.array = []
+
+    for (let i = 0; i < y; i++) {
+      this.array[i] = new Array(x).fill(0)
+    }
   }
 
   turn(direction) {
@@ -25,18 +29,22 @@ class Matrix {
   }
 
   set(x, y, num) {
-    this.array[x, y] = num
+    this.array[x][y] = num
   }
 
   clear(x, y) {
-    this.setBlock(x, y, 0)
+    this.set(x, y, 0)
   }
 }
 
 function turnLeft(matrix) {
   const x = matrix[0].length
   const y = matrix.length
-  const tempMatrix = new Array(x).fill(new Array(y).fill(0))
+  const tempMatrix = []
+
+  for (let i = 0; i < x; i++) {
+    tempMatrix[i] = new Array(y).fill(0)
+  }
 
   for (let i = 1; i <= x; i++) {
     for (let j = 0; j < y; j++) {
@@ -50,11 +58,15 @@ function turnLeft(matrix) {
 function turnRight(matrix) {
   const x = matrix[0].length
   const y = matrix.length
-  const tempMatrix = new Array(x).fill(new Array(y).fill(0))
+  const tempMatrix = []
+
+  for (let i = 0; i < x; i++) {
+    tempMatrix[i] = new Array(y).fill(0)
+  }
 
   for (let i = 1; i <= x; i++) {
     for (let j = 0; j < y; j++) {
-      tempMatrix[i - 1][j] = matrix[j][i - 1]
+      tempMatrix[i - 1][y - j - 1] = matrix[j][i - 1]
     }
   }
 
@@ -64,7 +76,11 @@ function turnRight(matrix) {
 function turnBack(matrix) {
   const x = matrix[0].length
   const y = matrix.length
-  const tempMatrix = new Array(x).fill(new Array(y).fill(0))
+  const tempMatrix = []
+
+  for (let i = 0; i < y; i++) {
+    tempMatrix[i] = new Array(x).fill(0)
+  }
 
   for (let i = 1; i <= x; i++) {
     for (let j = 0; j < y; j++) {

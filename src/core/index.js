@@ -2,22 +2,22 @@ import { Matrix } from './matrix'
 
 class Game {
   constructor({ size } = { size: 4 }) {
-    this.gameStatus = {
-      win: false,
-      score: 0,
-    }
-    this.matrix = new Matrix(size, size)
     this._max = 2048
+    this._size = size
 
-    this.init()
+    this.restart()
   }
 
   // init game
-  init() {
-    this.setRandomBlock(2)
-    this.setRandomBlock(2)
+  restart() {
+    this.matrix = new Matrix(this._size, this._size)
+    this.status = {
+      win: false,
+      score: 0,
+    }
 
-    return this
+    this.setRandomBlock(2)
+    this.setRandomBlock(2)
   }
 
   move(direction) {
@@ -26,24 +26,31 @@ class Game {
     switch (direction) {
       case 'bottom': {
         this.matrix.turn('right')
+        this.zip()
         max = this.calculate()
+        this.zip()
         this.matrix.turn('left')
         break
       }
       case 'top': {
         this.matrix.turn('left')
+        this.zip()
         max = this.calculate()
+        this.zip()
         this.matrix.turn('right')
         break
       }
       case 'left': {
-        this.calculate()
+        this.zip()
         max = this.calculate()
+        this.zip()
         break
       }
       case 'right': {
         this.matrix.turn('back')
+        this.zip()
         max = this.calculate()
+        this.zip()
         this.matrix.turn('back')
         break
       }
@@ -52,48 +59,62 @@ class Game {
     }
 
     this.updateGameStatus(max)
+    this.setRandomBlock(2)
   }
 
   updateGameStatus(max) {
     if (max >= this._max) {
-      this.gameStatus.win = true
+      this.status.win = true
     }
   }
 
-  calculate() {
-    const calcuArr = new Array(this.size).fill([])
-    const newArr = new Array(this.size).fill(new Array(this.size).fill(0))
-    let max = 0
+  zip() {
+    const tempArr = []
+    const newArr = []
 
-    for (let i = 0; i < this.size; i++) {
-      // calculate
-      for (let j = 0; j < this.size; j++) {
-        if (j < this.size - 1 && this.matrix.array[i][j] === this.matrix.array[i][j + 1]) {
-          const score = this.matrix.array[i][j] * 2
-
-          // update game score
-          this.gameStatus.score += score
-          this.matrix.set(i, j, score)
-          this.matrix.clear(i, j + 1)
-        }
-
-        // set new array
-        const num = this.matrix.array[i][j]
-
-        if (num) {
-          calcuArr[i].push(num)
-        }
-        if (num > max) max = num
-      }
+    for (let i = 0; i < this._size; i++) {
+      tempArr[i] = []
+    }
+    for (let i = 0; i < this._size; i++) {
+      newArr[i] = new Array(this._size).fill(0)
     }
 
-    calcuArr.forEach((row, i) => {
+    this.matrix.array.forEach((row, i) => {
+      row.forEach((num, j) => {
+        if (num !== 0) {
+          tempArr[i].push(num)
+        }
+      })
+    })
+    tempArr.forEach((row, i) => {
       row.forEach((num, j) => {
         newArr[i][j] = num
       })
     })
 
     this.matrix.array = newArr
+  }
+
+  calculate() {
+    let max = 0
+
+    for (let i = 0; i < this._size; i++) {
+      for (let j = 0; j < this._size; j++) {
+        if (j < this._size - 1 && this.matrix.array[i][j] === this.matrix.array[i][j + 1]) {
+          const score = this.matrix.array[i][j] * 2
+
+          // update game score
+          this.status.score += score
+          this.matrix.set(i, j, score)
+          this.matrix.clear(i, j + 1)
+        }
+
+        // get max
+        const num = this.matrix.array[i][j]
+
+        if (num > max) max = num
+      }
+    }
 
     return max
   }
@@ -126,7 +147,7 @@ class Game {
     if (row.some(item => item === 0)) {
       return row
     } else {
-      return this._getEmptyRow(rowNumber + 1 % this.size)
+      return this._getEmptyRow(rowNumber + 1 % this._size)
     }
   }
 
@@ -134,12 +155,18 @@ class Game {
     if (row[index] === 0) {
       row[index] = num
     } else {
-      this._setEmptyBlock(row, num, index + 1 % this.size)
+      row.some((rowNum, i) => {
+        if (rowNum === 0) {
+          row[i] = num
+          return true
+        }
+        return false
+      })
     }
   }
 
   _getRandomNumber() {
-    return Math.floor(Math.random() * this.size)
+    return Math.floor(Math.random() * this._size)
   }
 }
 
