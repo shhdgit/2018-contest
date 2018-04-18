@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({5:[function(require,module,exports) {
+})({13:[function(require,module,exports) {
 var global = (1,eval)("this");
 'use strict';
 
@@ -7358,7 +7358,7 @@ if (inBrowser) {
 /*  */
 
 exports.default = Vue;
-},{}],6:[function(require,module,exports) {
+},{}],11:[function(require,module,exports) {
 /* AlloyFinger v0.1.10
  * By dntzhang
  * Github: https://github.com/AlloyTeam/AlloyFinger
@@ -7681,7 +7681,7 @@ exports.default = Vue;
         window.AlloyFinger = AlloyFinger;
     }
 })();
-},{}],7:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 /* AlloyFinger v0.1.0 for Vue
  * By june01
  * Github: https://github.com/AlloyTeam/AlloyFinger
@@ -7821,7 +7821,7 @@ exports.default = Vue;
     window.AlloyFingerVue = AlloyFingerPlugin;
   }
 })();
-},{}],18:[function(require,module,exports) {
+},{}],19:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7935,7 +7935,7 @@ function turnBack(matrix) {
 }
 
 exports.Matrix = Matrix;
-},{}],15:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8148,7 +8148,7 @@ var Game = function () {
 }();
 
 exports.Game = Game;
-},{"./matrix":18}],11:[function(require,module,exports) {
+},{"./matrix":19}],15:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -8178,7 +8178,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],4:[function(require,module,exports) {
+},{}],10:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -8209,7 +8209,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":11}],17:[function(require,module,exports) {
+},{"./bundle-url":15}],18:[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -8451,7 +8451,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],16:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8521,7 +8521,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":4,"vue-hot-reload-api":17,"vue":5}],8:[function(require,module,exports) {
+},{"_css_loader":10,"vue-hot-reload-api":18,"vue":13}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8698,7 +8698,7 @@ render._withStripped = true
       
       }
     })();
-},{"game-core":15,"./components/block.vue":16,"_css_loader":4,"vue-hot-reload-api":17,"vue":5}],3:[function(require,module,exports) {
+},{"game-core":16,"./components/block.vue":17,"_css_loader":10,"vue-hot-reload-api":18,"vue":13}],6:[function(require,module,exports) {
 'use strict';
 
 var _vue = require('vue');
@@ -8728,7 +8728,7 @@ new _vue2.default({
     return h(_App2.default);
   }
 }).$mount('#app');
-},{"vue":5,"alloyfinger":6,"alloyfinger/vue/alloy_finger.vue":7,"./App":8}],19:[function(require,module,exports) {
+},{"vue":13,"alloyfinger":11,"alloyfinger/vue/alloy_finger.vue":12,"./App":14}],20:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -8758,7 +8758,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58252' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60005' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -8897,5 +8897,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[19,3])
-//# sourceMappingURL=/src.6e37f32a.map
+},{}]},{},[20,6])
+//# sourceMappingURL=src.6e37f32a.map
