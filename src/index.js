@@ -1,12 +1,9 @@
 import Vue from 'vue'
-import AlloyFinger from 'alloyfinger'
-import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
+import VueTouch from 'vue-touch'
 
 import App from './App'
 
-Vue.use(AlloyFingerPlugin, {
-    AlloyFinger
-})
+Vue.use(VueTouch, {name: 'v-touch'})
 
 new Vue({
   render: h => h(App),

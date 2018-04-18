@@ -6,8 +6,11 @@
       <button @click="restart">重新开始</button>
     </div>
   </div>
-  <div class="scene"
-    v-finger:swipe="handleSwipe">
+  <v-touch class="scene"
+    @swipeup="handleSwipe('up')"
+    @swipedown="handleSwipe('down')"
+    @swipeleft="handleSwipe('left')"
+    @swiperight="handleSwipe('right')">
     <div v-for="(row, index1) in matrix.array" :key="index1">
       <Block
         v-for="(num, index2) in row"
@@ -15,7 +18,7 @@
         :key="'' + index1 + index2 + num"
         :num="num"></Block>
     </div>
-  </div>
+  </v-touch>
   <h3 class="tips">PC端键盘控制，移动端滑动控制</h3>
 </div>
 </template>
@@ -47,8 +50,8 @@ export default {
   },
 
   methods: {
-    handleSwipe(e) {
-      this.game.move(e.direction.toLowerCase())
+    handleSwipe(direction) {
+      this.game.move(direction)
     },
     addKeyboardListener() {
       this.keyboardListener = e => {
