@@ -67,9 +67,9 @@ export default {
     },
     restart() {
       this.game = new Game()
-      this.matrix = this.game.matrix
       this.game.addWinEvent(() => this.gameover('win'))
       this.game.addDefeatEvent(() => this.gameover('defeat'))
+      this.matrix = this.game.matrix
     },
     gameover(status) {
       if (status === 'win') {
