@@ -4,6 +4,7 @@ class Event {
   }
 
   addEvent(eventName, func) {
+    if (typeof func !== 'function') return
     if (!this._list[eventName]) this._list[eventName] = []
 
     this._list[eventName].push(func)
