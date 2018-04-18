@@ -5,11 +5,11 @@ class Game {
     this._max = 2048
     this._size = size
 
-    this.restart()
+    this.init()
   }
 
   // init game
-  restart() {
+  init() {
     this.matrix = new Matrix(this._size, this._size)
     this.status = {
       win: false,
@@ -25,13 +25,13 @@ class Game {
     let max = 0
 
     switch (direction) {
-      case 'bottom': {
+      case 'down': {
         this.matrix.turn('right')
         this.updateGameboard()
         this.matrix.turn('left')
         break
       }
-      case 'top': {
+      case 'up': {
         this.matrix.turn('left')
         this.updateGameboard()
         this.matrix.turn('right')
@@ -52,7 +52,9 @@ class Game {
     }
 
     this.updateGameStatus()
-    this.setRandomBlock(2)
+
+    const randomNumber = Math.random() > .7 ? 4 : 2
+    this.setRandomBlock(randomNumber)
   }
 
   updateGameboard() {
@@ -142,7 +144,7 @@ class Game {
     if (row.some(item => item === 0)) {
       return row
     } else {
-      return this._getEmptyRow(rowNumber + 1 % this._size)
+      return this._getEmptyRow((rowNumber + 1) % this._size)
     }
   }
 

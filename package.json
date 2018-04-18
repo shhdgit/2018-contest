@@ -29,6 +29,7 @@
     "vue-template-compiler": "^2.5.16"
   },
   "dependencies": {
+    "alloyfinger": "^0.1.13",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0"
   }

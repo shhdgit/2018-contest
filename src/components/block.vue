@@ -1,10 +1,15 @@
 <template>
-<p>App work!</p>
+<div class="block">
+  <span v-if="num">{{ num }}</span>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'App',
+  name: 'block',
+
+  props: ['num'],
+
   data() {
     return {
     }
@@ -12,5 +17,17 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
+.block {
+  position: relative;
+}
+.block span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+  color: #666;
+}
 </style>

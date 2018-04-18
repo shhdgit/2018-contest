@@ -1,48 +1,87 @@
 <template>
 <div class="scene-wrap">
-  <div class="scene">
-    <div class="block" v-for="i in 16" :key="i"></div>
+  <div class="status-bar">
+    <span>分数：{{ game.status.score }}</span>
+    <div>
+      <button @click="restart">重新开始</button>
+    </div>
   </div>
-  <div v-for="(row, index) in game.matrix.array">
-    <span v-for="(num, index) in row">{{ num }}</span>
+  <div class="scene"
+    v-finger:swipe="handleSwipe">
+    <div v-for="(row, index1) in matrix.array" :key="index1">
+      <Block
+        v-for="(num, index2) in row"
+        :class="'score-' + num"
+        :key="'' + index1 + index2 + num"
+        :num="num"></Block>
+    </div>
   </div>
-  <div @click="up">up</div>
-  <div @click="down">down</div>
-  <div @click="left">left</div>
-  <div @click="right">right</div>
+  <h3 class="tips">PC端键盘控制，移动端滑动控制</h3>
 </div>
 </template>
 
 <script>
 import { Game } from 'game-core'
 
+import Block from './components/block.vue'
+
 export default {
   name: 'App',
+
+  components: {
+    Block,
+  },
+
   data() {
     return {
-      game: new Game(),
+      game: null,
+      matrix: [],
+      keyboardListener: null,
+      keyCodeMap: {
+        38: 'up',
+        40: 'down',
+        37: 'left',
+        39: 'right',
+      },
     }
   },
 
   methods: {
-    up() {
-      this.game.move('top')
+    handleSwipe(e) {
+      this.game.move(e.direction.toLowerCase())
     },
-    down() {
-      this.game.move('bottom')
+    addKeyboardListener() {
+      this.keyboardListener = e => {
+        const direction = this.keyCodeMap[e.keyCode]
+
+        if (direction) this.game.move(direction)
+      }
+
+      document.addEventListener('keyup', this.keyboardListener)
     },
-    left() {
-      this.game.move('left')
+    removeKeyboardListener() {
+      document.removeEventListener('keyup', this.keyboardListener)
     },
-    right() {
-      this.game.move('right')
+    restart() {
+      this.game = new Game()
+      this.matrix = this.game.matrix
     },
+  },
+
+  created() {
+    this.restart()
+    this.addKeyboardListener()
+  },
+
+  destroyed() {
+    this.removeKeyboardListener()
   },
 }
 </script>
 
 <style lang="stylus" scoped>
 .scene-wrap
+  position relative
   width 100%
   max-width 600px
   margin 0 auto
@@ -63,4 +102,18 @@ export default {
 .block
   background #cdc0b4
   float left
+
+.tips
+  color #999
+  text-align center
+  margin-top 20px
+
+.status-bar
+  display flex
+  justify-content space-between
+  margin 20px 10px
+
+for $i in 1..11
+  .score-{2 ** $i}
+    background green(blue(#eadb72, 72 + $i * 20), 150 + $i * 20)
 </style>

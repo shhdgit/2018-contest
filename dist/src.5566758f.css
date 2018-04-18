@@ -1,0 +1,39 @@
+
+.block[data-v-c6bbf6]{position:relative
+}
+.block span[data-v-c6bbf6]{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.8rem;color:#666
+}
+.scene-wrap[data-v-4001b7]{max-width:600px;margin:0 auto;user-select:none
+}
+.scene[data-v-4001b7],.scene-wrap[data-v-4001b7]{position:relative;width:100%
+}
+.scene[data-v-4001b7]{padding:1%;border-radius:10px;background:#bbada0;box-sizing:border-box
+}
+.scene[data-v-4001b7]:after{content:"";display:block;clear:both
+}
+.block[data-v-4001b7]{background:#cdc0b4;float:left
+}
+.tips[data-v-4001b7]{color:#999;text-align:center;margin-top:20px
+}
+.status-bar[data-v-4001b7]{display:flex;justify-content:space-between;margin:20px 10px
+}
+.score-2[data-v-4001b7]{background:#eaaa5c
+}
+.score-4[data-v-4001b7]{background:#eabe70
+}
+.score-8[data-v-4001b7]{background:#ead284
+}
+.score-16[data-v-4001b7]{background:#eae698
+}
+.score-32[data-v-4001b7]{background:#eafaac
+}
+.score-64[data-v-4001b7]{background:#eaffc0
+}
+.score-128[data-v-4001b7]{background:#eaffd4
+}
+.score-256[data-v-4001b7]{background:#eaffe8
+}
+.score-512[data-v-4001b7]{background:#eafffc
+}
+.score-1024[data-v-4001b7],.score-2048[data-v-4001b7]{background:#eaffff
+}
