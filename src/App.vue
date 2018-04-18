@@ -69,11 +69,21 @@ export default {
       this.game = new Game()
       this.matrix = this.game.matrix
     },
+    gameover(status) {
+      if (status === 'win') {
+        alert('恭喜通关！闲时记得再来一把~')
+      }
+      else alert('很遗憾，再接再厉吧！')
+
+      this.restart()
+    },
   },
 
   created() {
     this.restart()
     this.addKeyboardListener()
+    this.game.addWinEvent(() => this.gameover('win'))
+    this.game.addDefeatEvent(() => this.gameover('defeat'))
   },
 
   destroyed() {
