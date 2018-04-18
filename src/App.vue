@@ -128,5 +128,5 @@ export default {
 
 for $i in 1..11
   .score-{2 ** $i}
-    background green(blue(#eadb72, 72 + $i * 20), 150 + $i * 20)
+    background green(blue(#eadb72, 72 + $i * 20), 140 + $i * 20)
 </style>
