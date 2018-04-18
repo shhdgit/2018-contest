@@ -69,8 +69,7 @@ export default {
   },
 
   created() {
-    this.game = new Game()
-    this.matrix = this.game.matrix
+    this.restart()
     this.addKeyboardListener()
   },
 
