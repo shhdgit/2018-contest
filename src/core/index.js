@@ -11,6 +11,7 @@ class Game {
     this._event = new Event()
     this.matrix = new Matrix(this._size, this._size)
     this.status = {
+      over: false,
       score: 0,
       highScore: getHighScore(),
       max: 2,
@@ -52,6 +53,8 @@ class Game {
       default:
       throw new Error('Error direction')
     }
+
+    this._backup()
   }
 
   addWinEvent(func) {
@@ -63,6 +66,8 @@ class Game {
   }
 
   _backup() {
+    if (this.status.over) return
+
     setGameStatus({
       array: this.matrix.array,
       score: this.status.score,
@@ -88,8 +93,6 @@ class Game {
 
     const randomNumber = Math.random() > .7 ? 4 : 2
     this._setRandomBlock(randomNumber)
-
-    this._backup()
   }
 
   _canBlockMove() {
@@ -195,6 +198,7 @@ class Game {
 
   _gameover(status) {
     this._event.emit(status)
+    this.status.over = true
   }
 
   _haveEmptyBlock() {
