@@ -47,11 +47,6 @@ class Game {
       default:
       throw new Error('Error direction')
     }
-
-    this._updateGameStatus()
-
-    const randomNumber = Math.random() > .7 ? 4 : 2
-    this._setRandomBlock(randomNumber)
   }
 
   addWinEvent(func) {
@@ -63,15 +58,47 @@ class Game {
   }
 
   _updateGameboard() {
-    this._zip()
+    if (!this._canBlockMove()) return
+
+    this.matrix.array = this._zip()
     this._calculate()
-    this._zip()
+    this.matrix.array = this._zip()
+
+    const randomNumber = Math.random() > .7 ? 4 : 2
+    this._setRandomBlock(randomNumber)
   }
 
-  _updateGameStatus() {
-    if (this.status.max >= this._max) {
-      this.status.win = true
+  _canBlockMove() {
+    let canMove = false
+
+    for (let i = 0; i < this._size; i++) {
+      let haveZero = false
+
+      for (let j = 0; j < this._size; j++) {
+        if (!this.matrix.array[i][j]) {
+          haveZero = true
+          continue
+        }
+
+        if (haveZero && this.matrix.array[i][j]) {
+          canMove = true
+        }
+      }
     }
+
+    const zipArr = this._zip()
+
+    for (let i = 0; i < this._size; i++) {
+      for (let j = 0; j < this._size; j++) {
+        if ((j < this._size - 1) &&
+          zipArr[i][j] &&
+          (zipArr[i][j] === zipArr[i][j + 1])) {
+          canMove = true
+        }
+      }
+    }
+
+    return canMove
   }
 
   _zip() {
@@ -98,13 +125,14 @@ class Game {
       })
     })
 
-    this.matrix.array = newArr
+    return newArr
   }
 
   _calculate() {
     for (let i = 0; i < this._size; i++) {
       for (let j = 0; j < this._size; j++) {
-        if (j < this._size - 1 && this.matrix.array[i][j] === this.matrix.array[i][j + 1]) {
+        if ((j < this._size - 1) &&
+          (this.matrix.array[i][j] === this.matrix.array[i][j + 1])) {
           const score = this.matrix.array[i][j] * 2
 
           // update game score
