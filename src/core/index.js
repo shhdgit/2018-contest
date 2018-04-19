@@ -1,5 +1,6 @@
 import { Matrix } from './matrix'
 import { Event } from './event'
+import { getHighScore, setHighScore } from './score_record'
 
 class Game {
   constructor({ size } = { size: 4 }) {
@@ -9,6 +10,7 @@ class Game {
     this.matrix = new Matrix(this._size, this._size)
     this.status = {
       score: 0,
+      highScore: getHighScore() || 0,
       max: 2,
     }
 
@@ -106,7 +108,8 @@ class Game {
           const score = this.matrix.array[i][j] * 2
 
           // update game score
-          this.status.score += score
+          this._setScore(score)
+
           this.matrix.set(i, j, score)
           this.matrix.clear(i, j + 1)
         }
@@ -119,6 +122,15 @@ class Game {
     }
 
     if (this.status.max === 2048) this._gameover('win')
+  }
+
+  _setScore(score) {
+    this.status.score += score
+
+    if (this.status.score > this.status.highScore) {
+      this.status.highScore = this.status.score
+      setHighScore(this.status.score)
+    }
   }
 
   _setRandomBlock(num) {

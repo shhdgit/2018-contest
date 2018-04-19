@@ -1,9 +1,18 @@
 <template>
 <div class="scene-wrap">
   <div class="status-bar">
-    <span>分数：{{ game.status.score }}</span>
     <div>
-      <button @click="restart">重新开始</button>
+      <div class="score">
+        <span class="score-title">HIGH SCORE</span>
+        <span class="score-num">{{ game.status.highScore }}</span>
+      </div>
+      <div class="score">
+        <span class="score-title">SCORE</span>
+        <span class="score-num">{{ game.status.score }}</span>
+      </div>
+    </div>
+    <div>
+      <button @click="restart" class="restart">重新开始</button>
     </div>
   </div>
   <v-touch class="scene"
@@ -93,6 +102,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+$main-bg = #bbada0
+
 .scene-wrap
   position relative
   width 100%
@@ -105,7 +116,7 @@ export default {
   width 100%
   padding 1%
   border-radius 10px
-  background #bbada0
+  background $main-bg
   box-sizing border-box
   &::after
     content ''
@@ -124,9 +135,38 @@ export default {
 .status-bar
   display flex
   justify-content space-between
-  margin 20px 10px
+  align-items center
+  margin 20px 0
 
 for $i in 1..11
   .score-{2 ** $i}
     background green(blue(#eadb72, 72 + $i * 20), 140 + $i * 20)
+
+.restart, .score
+  border-radius 10px
+  padding 10px
+  background $main-bg
+  font-weight 700
+
+.restart
+  padding 10px 15px
+  border 0
+  font-size 16px
+  outline none
+  color #fafafa
+
+.score
+  float left
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  height 40px
+  margin-right 10px
+.score-title
+  color #e0d1c3
+  font-size 12px
+  margin-bottom 5px
+.score-num
+  color #fafafa
 </style>

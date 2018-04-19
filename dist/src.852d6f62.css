@@ -15,7 +15,7 @@
 }
 .tips[data-v-4001b7]{color:#999;text-align:center;margin-top:20px
 }
-.status-bar[data-v-4001b7]{display:flex;justify-content:space-between;margin:20px 10px
+.status-bar[data-v-4001b7]{display:flex;justify-content:space-between;align-items:center;margin:20px 0
 }
 .score-2[data-v-4001b7]{background:#eaa05c
 }
@@ -36,4 +36,14 @@
 .score-512[data-v-4001b7]{background:#eafffc
 }
 .score-1024[data-v-4001b7],.score-2048[data-v-4001b7]{background:#eaffff
+}
+.restart[data-v-4001b7],.score[data-v-4001b7]{border-radius:10px;padding:10px;background:#bbada0;font-weight:700
+}
+.restart[data-v-4001b7]{padding:10px 15px;border:0;font-size:16px;outline:none;color:#fafafa
+}
+.score[data-v-4001b7]{float:left;display:flex;flex-direction:column;justify-content:center;align-items:center;height:40px;margin-right:10px
+}
+.score-title[data-v-4001b7]{color:#e0d1c3;font-size:12px;margin-bottom:5px
+}
+.score-num[data-v-4001b7]{color:#fafafa
 }
