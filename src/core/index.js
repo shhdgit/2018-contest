@@ -1,26 +1,31 @@
 import { Matrix } from './matrix'
 import { Event } from './event'
-import { getHighScore, setHighScore } from './score_record'
+import { getHighScore, setHighScore, getGameStatus, setGameStatus } from './game_record'
 
 class Game {
-  constructor({ size } = { size: 4 }) {
+  constructor({ size } = { size: 4 }, restart) {
+    const record = getGameStatus()
+
     this._max = 2048
     this._size = size
     this._event = new Event()
     this.matrix = new Matrix(this._size, this._size)
     this.status = {
       score: 0,
-      highScore: getHighScore() || 0,
+      highScore: getHighScore(),
       max: 2,
     }
 
-    this._setRandomBlock(2)
-    this._setRandomBlock(2)
+    if (restart || !record) {
+      this._setRandomBlock(2)
+      this._setRandomBlock(2)
+      this._backup()
+    } else {
+      this._recovery(record)
+    }
   }
 
   move(direction) {
-    let max = 0
-
     switch (direction) {
       case 'down': {
         this.matrix.turn('right')
@@ -57,8 +62,25 @@ class Game {
     this._event.addEvent('defeat', func)
   }
 
+  _backup() {
+    setGameStatus({
+      array: this.matrix.array,
+      score: this.status.score,
+      max: this.status.max,
+    })
+  }
+
+  _recovery(record) {
+    this.status.score = record.score
+    this.status.max = record.max
+    this.matrix.array = record.array
+  }
+
   _updateGameboard() {
-    if (!this._canBlockMove()) return
+    if (!this._canBlockMove()) {
+      if (!this._haveEmptyBlock()) this._gameover('defeat')
+      return
+    }
 
     this.matrix.array = this._zip()
     this._calculate()
@@ -66,6 +88,8 @@ class Game {
 
     const randomNumber = Math.random() > .7 ? 4 : 2
     this._setRandomBlock(randomNumber)
+
+    this._backup()
   }
 
   _canBlockMove() {
@@ -166,8 +190,6 @@ class Game {
 
     if (emptyRow) {
       this._setEmptyBlock(emptyRow, num, this._getRandomNumber())
-    } else {
-      this._gameover('defeat')
     }
   }
 

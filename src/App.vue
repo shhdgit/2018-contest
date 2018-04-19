@@ -12,7 +12,7 @@
       </div>
     </div>
     <div>
-      <button @click="restart" class="restart">重新开始</button>
+      <button @click="start(true)" class="restart">重新开始</button>
     </div>
   </div>
   <v-touch class="scene"
@@ -74,8 +74,8 @@ export default {
     removeKeyboardListener() {
       document.removeEventListener('keyup', this.keyboardListener)
     },
-    restart() {
-      this.game = new Game()
+    start(restart) {
+      this.game = new Game({ size: 4 }, restart)
       this.game.addWinEvent(() => this.gameover('win'))
       this.game.addDefeatEvent(() => this.gameover('defeat'))
       this.matrix = this.game.matrix
@@ -86,12 +86,12 @@ export default {
       }
       else alert('很遗憾，再接再厉吧！')
 
-      this.restart()
+      this.start(true)
     },
   },
 
   created() {
-    this.restart()
+    this.start()
     this.addKeyboardListener()
   },
 
